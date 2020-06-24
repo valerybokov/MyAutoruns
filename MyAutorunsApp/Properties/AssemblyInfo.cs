@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("MyAutorunsApp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Valery Bokov")]
 [assembly: AssemblyProduct("MyAutorunsApp")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
