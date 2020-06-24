@@ -1,0 +1,86 @@
+﻿<Window x:Class="MyAutorunsApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyAutorunsApp"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded" Closing="Window_Closing"
+        Title="MyAutoruns" Height="450" Width="800">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="itemstyle" TargetType="{x:Type ListViewItem}">
+                <EventSetter Event="MouseDoubleClick" Handler="ListView_DoubleClick" />
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Name="miRunAsAdmin" Click="MenuItem_Click">
+                    <MenuItem.Header>
+                        <StackPanel>
+                            <Image Name="imgForMenuItemAdmin" Width="20" Height="20" />
+                            <ContentPresenter Content="Run as administrator" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Name="miExit" Click="MenuItem_Click" Header="Exit"/>
+            </MenuItem>
+        </Menu>
+        
+        <ListView Name="lw" ItemContainerStyle="{StaticResource itemstyle}" Grid.Row="1" >
+            <ListView.View>
+                <GridView x:Name="gw">
+                    <GridViewColumn Width="30" Header="Icon">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=Icon, Mode=OneWay}" Width="20"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="300" DisplayMemberBinding="{Binding Path=Directory, Mode=OneWay}" Header="Directory" />
+                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=FileName, Mode=OneWay}" Header="File name"/>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=CmdArguments, Mode=OneWay}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Command line arguments" TextWrapping="WrapWithOverflow"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="70" DisplayMemberBinding="{Binding Path=RunType, Mode=OneWay}" Header="Run type"/>
+                    <GridViewColumn Width="50">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="With digital signature" TextWrapping="WrapWithOverflow"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsSignatureExists, Mode=OneWay}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="50">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Is digital signature valid" TextWrapping="WrapWithOverflow"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsSignatureValid, Mode=OneWay}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding Path=Manufacturer, Mode=OneWay}" Header="Manufacturer"/>
+                </GridView>                
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
